@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn" data-ng-app="demoForDirective">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>angularjs</title>
+    <script src="angular.js"></script>
+    <script src="module.js"></script>
+</head>
+<body>
+<div ng-controller='demoForDirectiveController'>
+    <!--增加指令标签-->
+    <testdirective testdirective-title='title'>
+        {{text}}
+    </testdirective>
+</div>
+<div>
+    <!--为原生标签增加动态属性-->
+    分数:<input type="text" attrsdirective/><br/>
+</div>
+<!--通过控制器控制子元素-->
+<div ng-controller="SomeController">
+    <accordion>
+        <expander class="expander"
+                  ng-repeat="expander in expanders"
+                  expander-title="expander.title">
+            {{expander.text}}
+        </expander>
+    </accordion>
+</div>
+</body>
+</html>
+<script>
+    angular.module('demoForDirective.controller', [])
+        .controller('demoForDirectiveController', function ($scope) {
+            $scope.title = '点击展开';
+            $scope.text = '这里是内部的内容。';
+        })
+
+        .controller('SomeController', function ($scope) {
+            $scope.expanders = [
+                {title: '点击标题一', text: '内容一'},
+                {title: 'click me two', text: 'two click'},
+                {title: '标题三', text: '内容三'},
+                {title: 'click me three', text: 'three click'}];
+        });
+</script>
